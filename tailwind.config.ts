@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,20 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Game specific colors
+				game: {
+					'bg': '#222222',
+					'text': '#F1F1F1',
+					'primary': '#9b87f5',
+					'accent': '#F97316',
+					'energy': '#1EAEDB',
+					'danger': '#ea384c',
+					'overlay': 'rgba(0, 0, 0, 0.75)'
 				}
+			},
+			fontFamily: {
+				pixel: ['"Press Start 2P"', 'cursive'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -70,25 +84,33 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'pulse-energy': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.6' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'time-slow': {
+					'0%': { filter: 'hue-rotate(0deg) brightness(1)' },
+					'50%': { filter: 'hue-rotate(45deg) brightness(1.2)' },
+					'100%': { filter: 'hue-rotate(0deg) brightness(1)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-energy': 'pulse-energy 2s infinite ease-in-out',
+				'float': 'float 6s ease-in-out infinite',
+				'time-slow': 'time-slow 2s infinite'
 			}
 		}
 	},
