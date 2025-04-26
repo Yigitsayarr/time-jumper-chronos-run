@@ -1,23 +1,33 @@
-
 import React, { useState } from 'react';
 import Level from './Level';
 import GameControls from './GameControls';
 import { useGameContext } from './GameContext';
+import EnergyBar from './EnergyBar';
 
 interface GameScreenProps {
   onBack: () => void;
 }
 
 const GameScreen: React.FC<GameScreenProps> = ({ onBack }) => {
-  const { gameState, slowTime, releaseTime } = useGameContext();
+  const { gameState, slowTime, releaseTime, startGame } = useGameContext();
   
   // Handle touch/click events for time control
   const handleTouchStart = () => {
+    // If game is not active yet, start the game on first touch
+    if (!gameState.isGameActive) {
+      startGame();
+      return;
+    }
+    
+    // Otherwise, slow down time
     slowTime();
   };
   
   const handleTouchEnd = () => {
-    releaseTime();
+    // Only release time if the game is active
+    if (gameState.isGameActive) {
+      releaseTime();
+    }
   };
   
   return (
@@ -30,6 +40,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onBack }) => {
     >
       <Level levelNumber={gameState.currentLevel} />
       <GameControls onBack={onBack} />
+      <EnergyBar />
       
       {!gameState.isGameActive && (
         <div className="absolute inset-0 bg-game-overlay flex items-center justify-center">
